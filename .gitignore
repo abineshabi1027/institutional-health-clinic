@@ -1,0 +1,15 @@
+# Python cache files (these generate automatically and clutter your repo)
+__pycache__/
+*.pyc
+
+# Virtual Environments (if you are using one, never push it)
+venv/
+env/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Optional: If you want to force users to generate the data themselves, ignore the CSVs
+messy_student_health_data.csv
+clean_student_health_data.csv
