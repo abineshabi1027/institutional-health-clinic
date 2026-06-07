@@ -33,7 +33,7 @@
             color: var(--primary);
         }
 
-        /* CSS Grid for Layout */
+      
         .kpi-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -55,7 +55,7 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* KPI Card Styling */
+     
         .kpi-title {
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -120,7 +120,7 @@
     </div>
 
     <script>
-        // Store global chart instances so we can update/destroy them if needed
+     
         let charts = {};
 
         async function fetchDashboardData() {
@@ -141,7 +141,7 @@
         }
 
         function populateKPIs(kpis) {
-            // Animate the numbers counting up for a premium feel
+           
             document.getElementById('kpiTotalVisits').innerText = kpis.total_visits.toLocaleString();
             document.getElementById('kpiUniquePatients').innerText = kpis.unique_patients.toLocaleString();
         }
@@ -159,7 +159,7 @@
                         backgroundColor: 'rgba(37, 99, 235, 0.1)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.3 // Adds a slight curve to the line
+                        tension: 0.3 
                     }]
                 },
                 options: { maintainAspectRatio: false }
@@ -197,12 +197,10 @@
                 },
                 options: { 
                     maintainAspectRatio: false,
-                    cutout: '65%' // Makes the doughnut ring thinner
+                    cutout: '65%'
                 }
             });
         }
-
-        // Initialize dashboard on load
         window.addEventListener('DOMContentLoaded', fetchDashboardData);
     </script>
 </body>
