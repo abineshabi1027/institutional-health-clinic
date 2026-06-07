@@ -3,14 +3,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Set visual style for the plots
+
 sns.set_theme(style="whitegrid")
 
-# 1. Connect to the database
 conn = sqlite3.connect('student_health.db')
 
-# 2. Write a complex SQL Query with a JOIN
-# We want to see symptoms and diagnoses alongside student demographics
 query = '''
     SELECT 
         s.gender, 
@@ -26,13 +23,11 @@ query = '''
 df = pd.read_sql_query(query, conn)
 conn.close()
 
-# Ensure dates are properly formatted for analysis
 df['visit_date'] = pd.to_datetime(df['visit_date'])
 df['visit_month'] = df['visit_date'].dt.month_name()
 
 print("Data loaded successfully. Generating insights...\n")
 
-# --- Insight 1: Symptom Frequency Distribution ---
 plt.figure(figsize=(10, 6))
 sns.countplot(data=df, y='symptoms', order=df['symptoms'].value_counts().index, palette='viridis')
 plt.title('Most Common Student Clinic Symptoms')
@@ -42,8 +37,6 @@ plt.tight_layout()
 plt.savefig('symptom_distribution.png')
 print("Generated: symptom_distribution.png")
 
-# --- Insight 2: Statistical Correlation (Pearson's Coefficient) ---
-# Calculate Karl Pearson's correlation coefficient between height and weight
 correlation = df['height_cm'].corr(df['weight_kg'])
 print(f"Karl Pearson's Correlation Coefficient (Height vs. Weight): {correlation:.3f}")
 
@@ -56,11 +49,8 @@ plt.tight_layout()
 plt.savefig('height_weight_correlation.png')
 print("Generated: height_weight_correlation.png")
 
-# --- Insight 3: Clinic Workload Over Time ---
-# Group visits by month to see seasonal trends
 monthly_visits = df.groupby('visit_month').size().reset_index(name='visit_count')
 
-# Sort months chronologically
 months = ["January", "February", "March", "April", "May", "June", 
           "July", "August", "September", "October", "November", "December"]
 monthly_visits['visit_month'] = pd.Categorical(monthly_visits['visit_month'], categories=months, ordered=True)
